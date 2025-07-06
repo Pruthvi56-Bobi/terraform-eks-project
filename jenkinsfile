@@ -21,14 +21,13 @@ pipeline {
 
     stage('Plan') {
       steps {
-        sh 'terraform plan'
+        sh 'terraform plan -var-file="terraform.tfvars"'
       }
     }
 
     stage('Apply') {
       steps {
-        input "Do you want to apply the changes?"
-        sh 'terraform apply -auto-approve'
+        sh 'terraform apply -auto-approve tfplan'
       }
     }
   }
